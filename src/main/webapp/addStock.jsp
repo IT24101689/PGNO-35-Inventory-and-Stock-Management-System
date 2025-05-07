@@ -33,10 +33,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Add Stock - Inventory Management System</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
 
   <style>
     body {
@@ -156,8 +156,23 @@
       let yyyy = today.getFullYear();
       let mm = String(today.getMonth() + 1).padStart(2, '0');
       let dd = String(today.getDate()).padStart(2, '0');
-      document.getElementById("purchaseDate").value = yyyy + '-' + mm + '-' + dd;
+      let purchaseDate = yyyy + '-' + mm + '-' + dd;
+
+      // Set the current date as the default for the purchase date
+      document.getElementById("purchaseDate").value = purchaseDate;
+
+      // Set the expiry date's minimum to the purchase date
+      document.getElementById("expiryDate").setAttribute('min', purchaseDate);
     }
+
+    function updateExpiryDateMin() {
+      let purchaseDate = document.getElementById("purchaseDate").value;
+      if (purchaseDate) {
+        // Update the expiry date's minimum value whenever the purchase date is changed
+        document.getElementById("expiryDate").setAttribute('min', purchaseDate);
+      }
+    }
+
     window.onload = setPurchaseDate;
   </script>
 </head>
@@ -199,7 +214,7 @@
 
     <div class="input-group">
       <label for="purchaseDate">Purchase Date</label>
-      <input type="date" id="purchaseDate" name="purchaseDate" readonly>
+      <input type="date" id="purchaseDate" name="purchaseDate" onchange="updateExpiryDateMin()">
     </div>
 
     <div class="input-group">

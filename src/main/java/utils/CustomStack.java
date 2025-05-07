@@ -3,7 +3,7 @@ package utils;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 
-public class CustomStack<T> {
+public class CustomStack<T> implements Stack<T> {
     private ArrayList<T> stackList;
 
     public CustomStack() {

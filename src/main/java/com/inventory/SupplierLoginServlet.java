@@ -8,7 +8,7 @@ import java.io.*;
 @WebServlet("/SupplierLoginServlet")
 public class SupplierLoginServlet extends HttpServlet {
     private static final String SUPPLIER_CREDENTIALS_FILE =
-            "C:\\Users\\paves\\OneDrive\\Pictures\\Inventory-Stock-Management-System-main\\src\\main\\webapp\\SupplierLoginCredentials.txt";
+            "C:\\Users\\USER\\Desktop\\inventory\\Supplier_Management\\src\\main\\webapp\\SupplierLoginCredentials.txt";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String inputUsername = request.getParameter("username").trim();

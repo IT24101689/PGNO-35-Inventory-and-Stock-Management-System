@@ -6,4 +6,10 @@ supplier3
 MSI,Toys,Gun,100,1500.00,2025-05-02,2025-06-14
 
 supplier1
-Asus,Electronics,Laptop,10,200000.00,2025-04-14,2025-05-07
+
+paul
+7star,flour,atta flour,70,500.00,2025-05-07,2025-05-21
+
+Andrew
+Gold Farms,Food,Mushrooms,5,5000.00,2025-05-07,2025-05-27
+Gold Farms,Food,Eggs,20,30.00,2025-05-07,2025-05-30

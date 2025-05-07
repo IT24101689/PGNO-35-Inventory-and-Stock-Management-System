@@ -17,7 +17,7 @@
     }
 
     // File to store supplier details
-    File file = new File("C:\\Users\\paves\\OneDrive\\Pictures\\Inventory-Stock-Management-System-main\\src\\main\\webapp\\SupplierLoginCredentials.txt");
+    File file = new File("C:\\Users\\USER\\Desktop\\inventory\\Supplier_Management\\src\\main\\webapp\\SupplierLoginCredentials.txt");
     BufferedWriter bw = null;
 
     try {

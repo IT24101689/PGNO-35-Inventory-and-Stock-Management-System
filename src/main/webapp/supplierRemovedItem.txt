@@ -28,3 +28,18 @@ Asus,Electronics,Rog 5,10,150000.00,2025-05-05,2034-11-15
 supplier1
 Asus,Electronics,Earphone,20,1300.00,2025-05-05,2025-06-12
 
+supplier1
+Asus,Electronics,Laptop,10,200000.00,2025-04-14,2025-05-07
+
+paul
+7star,flour,wheat flour,26,500.00,2025-05-07,2025-05-12
+
+paul
+7star,flour,wheat flour,90,35.00,2025-05-07,2025-05-12
+
+paul
+7star,flour,tea flour,36,50.00,2025-05-07,2025-05-27
+
+Andrew
+Gold Farms,Food,Sauce,14,280.00,2025-05-07,2025-05-17
+

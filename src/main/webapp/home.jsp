@@ -71,7 +71,7 @@
     <div class="hero">
         <i class="bi bi-box-seam"></i>
         <h1>Inventory Stock Management System </h1>
-        <h2>(PG-125)</h2>
+        <h2>(PGNO: 35)</h2>
     </div>
 
     <p>Your efficient solution for managing stock, tracking inventory, and ensuring smooth operations.</p>

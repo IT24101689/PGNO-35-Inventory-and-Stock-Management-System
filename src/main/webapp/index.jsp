@@ -92,7 +92,7 @@
     <div class="hero">
         <i class="bi bi-archive"></i>
     </div>
-    <h1>Welcome to <br><strong>Inventory Management System (PG-125)</strong></h1>
+    <h1>Welcome to <br><strong>Inventory Management System (PGNO: 35)</strong></h1>
 
     <a href="loginSelection.jsp" class="button">Login Selection</a>
 

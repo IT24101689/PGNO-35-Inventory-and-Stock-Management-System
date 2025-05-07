@@ -7,7 +7,7 @@
     String password = request.getParameter("supplier-password");
 
     // File containing supplier credentials (username:password:companyName format)
-    File file = new File("C:\\Users\\paves\\OneDrive\\Pictures\\Inventory-Stock-Management-System-main\\src\\main\\webapp\\SupplierLoginCredentials.txt");
+    File file = new File("C:\\Users\\USER\\Desktop\\inventory\\Supplier_Management\\src\\main\\webapp\\SupplierLoginCredentials.txt");
     boolean isAuthenticated = false;
     String companyName = "";
 

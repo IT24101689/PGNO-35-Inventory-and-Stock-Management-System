@@ -11,3 +11,10 @@ Asus,Electronics,Laptop,15,250000.00,2025-05-05,2030-12-27
 Asus,Electronics,tazer,2,20.00,2025-05-05,2025-05-29
 Asus,Electronics,Earphone,20,1300.00,2025-05-05,2025-06-12
 Asus,Electronics,Rog 5,10,150000.00,2025-05-05,2034-11-15
+Gold Farms,Food,Mushrooms,5,5000.00,2025-05-07,2025-05-27
+Gold Farms,Food,Eggs,20,30.00,2025-05-07,2025-05-30
+Gold Farms,Food,Sauce,14,280.00,2025-05-07,2025-05-17
+7star,flour,atta flour,70,500.00,2025-05-07,2025-05-21
+7star,flour,tea flour,36,50.00,2025-05-07,2025-05-27
+7star,flour,wheat flour,26,500.00,2025-05-07,2025-05-12
+7star,flour,wheat flour,90,35.00,2025-05-07,2025-05-12

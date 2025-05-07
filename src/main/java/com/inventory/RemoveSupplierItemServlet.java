@@ -11,8 +11,8 @@ import javax.servlet.http.*;
 
 @WebServlet("/RemoveSupplierItemServlet")
 public class RemoveSupplierItemServlet extends HttpServlet {
-    private static final String INVENTORY_FILE = "C:\\Users\\paves\\OneDrive\\Pictures\\Inventory-Stock-Management-System-main\\src\\main\\webapp\\suppliersInventory.txt";
-    private static final String REMOVED_ITEM_FILE = "C:\\Users\\paves\\OneDrive\\Pictures\\Inventory-Stock-Management-System-main\\src\\main\\webapp\\supplierRemovedItem.txt";
+    private static final String INVENTORY_FILE = "C:\\Users\\USER\\Desktop\\inventory\\Supplier_Management\\src\\main\\webapp\\suppliersInventory.txt";
+    private static final String REMOVED_ITEM_FILE = "C:\\Users\\USER\\Desktop\\inventory\\Supplier_Management\\src\\main\\webapp\\supplierRemovedItem.txt";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -23,7 +23,6 @@ public class RemoveSupplierItemServlet extends HttpServlet {
             return;
         }
 
-        String category = request.getParameter("itemType");
         List<String> lines = Files.readAllLines(Paths.get(INVENTORY_FILE));
         List<String> updatedLines = new ArrayList<>();
         Map<String, List<String>> userItems = new LinkedHashMap<>();
@@ -47,38 +46,30 @@ public class RemoveSupplierItemServlet extends HttpServlet {
         }
 
         List<String> items = userItems.get(username);
-        CustomStack<String> categoryStack = new CustomStack<>();
-        List<String> otherItems = new ArrayList<>();
 
-        for (String item : items) {
-            if (item.startsWith(category + ",")) {
-                categoryStack.push(item);
-            } else {
-                otherItems.add(item);
+        // If the user has items, remove the last one
+        if (!items.isEmpty()) {
+            String lastItem = items.get(items.size() - 1);
+            appendToRemovedFile(username, lastItem);
+
+            // Remove the last item
+            items.remove(items.size() - 1);
+            userItems.put(username, items);
+
+            // Update the inventory file
+            for (Map.Entry<String, List<String>> entry : userItems.entrySet()) {
+                if (!entry.getKey().equals(username)) {
+                    updatedLines.add(entry.getKey());
+                    updatedLines.addAll(entry.getValue());
+                    updatedLines.add("");
+                }
             }
+
+            updatedLines.add(username);
+            updatedLines.addAll(userItems.get(username));
+            Files.write(Paths.get(INVENTORY_FILE), updatedLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         }
 
-        if (!categoryStack.isEmpty()) {
-            String removedItem = categoryStack.pop();
-            appendToRemovedFile(username, removedItem);
-        }
-
-        List<String> updatedUserItems = new ArrayList<>(otherItems);
-        updatedUserItems.addAll(categoryStack.getRemainingItems());
-        userItems.put(username, updatedUserItems);
-
-        for (Map.Entry<String, List<String>> entry : userItems.entrySet()) {
-            if (!entry.getKey().equals(username)) {
-                updatedLines.add(entry.getKey());
-                updatedLines.addAll(entry.getValue());
-                updatedLines.add("");
-            }
-        }
-
-        updatedLines.add(username);
-        updatedLines.addAll(userItems.get(username));
-
-        Files.write(Paths.get(INVENTORY_FILE), updatedLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         response.sendRedirect("supplierDashboard.jsp");
     }
 

@@ -10,8 +10,8 @@ import java.util.Date;
 @WebServlet("/AddStockServlet")
 public class AddStockServlet extends HttpServlet {
 
-    private static final String SUPPLIER_INVENTORY_FILE = "C:\\Users\\paves\\OneDrive\\Pictures\\Inventory-Stock-Management-System-main\\src\\main\\webapp\\suppliersInventory.txt";
-    private static final String STOCK_INVENTORY_FILE = "C:\\Users\\paves\\OneDrive\\Pictures\\Inventory-Stock-Management-System-main\\src\\main\\webapp\\stockInventory.txt";
+    private static final String SUPPLIER_INVENTORY_FILE = "C:\\Users\\USER\\Desktop\\inventory\\Supplier_Management\\src\\main\\webapp\\suppliersInventory.txt";
+    private static final String STOCK_INVENTORY_FILE = "C:\\Users\\USER\\Desktop\\inventory\\Supplier_Management\\src\\main\\webapp\\stockInventory.txt";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();

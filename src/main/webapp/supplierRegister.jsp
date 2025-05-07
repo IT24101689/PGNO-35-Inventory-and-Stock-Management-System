@@ -157,7 +157,6 @@
             margin-top: 30px;
         }
 
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -200,15 +199,8 @@
         </div>
         <div class="input-group">
             <label for="item-category">Item Category</label>
-            <select id="item-category" name="item-category" required>
-                <option value="" disabled selected> Select the category </option>
-                <option value="Electronics">Electronics</option>
-                <option value="Furniture">Furniture</option>
-                <option value="Clothing">Clothing</option>
-                <option value="Food">Food</option>
-                <option value="Toys">Toys</option>
-                <!-- You can add more categories as per your requirements -->
-            </select>
+            <!-- Changed to input field for free text -->
+            <input type="text" id="item-category" name="item-category" required placeholder="Enter the category of items you supply">
         </div>
         <button type="submit" class="button">Register</button>
     </form>
