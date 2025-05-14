@@ -161,8 +161,6 @@
     </div>
     <% } %>
 
-
-
     <div class="table-container">
         <% if (!supplierItems.isEmpty()) { %>
         <table id="itemsTable">
@@ -204,7 +202,6 @@
     </div>
 
     <a href="supplierInventory.jsp" class="button">Manage Inventory</a>
-    <a href="editSupplier.jsp" class="button">Edit</a>
     <a href="LogoutServlet" class="button">Logout</a>
 </div>
 

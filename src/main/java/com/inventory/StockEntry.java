@@ -48,4 +48,19 @@ public class StockEntry {
         return String.format("%s,%s,%s,%d,%.2f,%s,%s",
                 companyName, category, itemName, quantity, price, purchaseDate, expiryDate);
     }
+    public static StockEntry fromString(String line) {
+        String[] parts = line.split(",");
+        if (parts.length != 7) {
+            throw new IllegalArgumentException("Invalid stock entry format");
+        }
+        return new StockEntry(
+                parts[0].trim(), // companyName
+                parts[1].trim(), // category
+                parts[2].trim(), // itemName
+                Integer.parseInt(parts[3].trim()), // quantity
+                Double.parseDouble(parts[4].trim()), // price
+                parts[5].trim(), // purchaseDate
+                parts[6].trim()  // expiryDate
+        );
+    }
 }

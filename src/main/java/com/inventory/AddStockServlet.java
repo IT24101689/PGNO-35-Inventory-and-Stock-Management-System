@@ -9,11 +9,24 @@ import java.util.Date;
 
 @WebServlet("/AddStockServlet")
 public class AddStockServlet extends HttpServlet {
-
     private static final String SUPPLIER_INVENTORY_FILE = "C:\\Users\\USER\\Desktop\\inventory\\Supplier_Management\\src\\main\\webapp\\suppliersInventory.txt";
     private static final String STOCK_INVENTORY_FILE = "C:\\Users\\USER\\Desktop\\inventory\\Supplier_Management\\src\\main\\webapp\\stockInventory.txt";
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private SupplierInventoryManager inventoryManager;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            inventoryManager = new SupplierInventoryManager(SUPPLIER_INVENTORY_FILE, STOCK_INVENTORY_FILE);
+            getServletContext().setAttribute("inventoryManager", inventoryManager);
+        } catch (IOException e) {
+            throw new ServletException("Failed to initialize inventory manager", e);
+        }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         HttpSession session = request.getSession();
         String supplierUsername = (String) session.getAttribute("supplierUsername");
 
@@ -23,6 +36,7 @@ public class AddStockServlet extends HttpServlet {
         }
 
         try {
+            // Get and validate all parameters
             String companyName = request.getParameter("companyName");
             String category = request.getParameter("category");
             String itemName = request.getParameter("itemName");
@@ -30,6 +44,7 @@ public class AddStockServlet extends HttpServlet {
             String priceStr = request.getParameter("price");
             String expiryDate = request.getParameter("expiryDate");
 
+            // Validate required fields
             if (companyName == null || companyName.trim().isEmpty() ||
                     category == null || category.trim().isEmpty() ||
                     itemName == null || itemName.trim().isEmpty() ||
@@ -42,6 +57,7 @@ public class AddStockServlet extends HttpServlet {
                 return;
             }
 
+            // Parse numeric values
             int quantity;
             double price;
             try {
@@ -53,32 +69,26 @@ public class AddStockServlet extends HttpServlet {
                 return;
             }
 
+            // Validate positive values
             if (quantity <= 0 || price <= 0) {
                 session.setAttribute("errorMessage", "Quantity and price must be positive numbers.");
                 response.sendRedirect("addStock.jsp");
                 return;
             }
 
+            // Create stock entry
             String purchaseDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-
-            // Use OOP - Create a StockEntry object
             StockEntry stockEntry = new StockEntry(
                     companyName, category, itemName, quantity, price, purchaseDate, expiryDate
             );
 
-            // Use OOP - Delegate to the SupplierInventoryManager
-            SupplierInventoryManager manager = new SupplierInventoryManager(
-                    SUPPLIER_INVENTORY_FILE, STOCK_INVENTORY_FILE
-
-            );
-            manager.addStock(supplierUsername, stockEntry);
-
-
+            // Add to inventory using CustomStack
+            inventoryManager.addStock(supplierUsername, stockEntry);
 
             response.sendRedirect("supplierDashboard.jsp?message=Stock added successfully.");
 
         } catch (Exception e) {
-            e.printStackTrace(); // for debugging
+            e.printStackTrace();
             session.setAttribute("errorMessage", "Error processing stock addition. Try again.");
             response.sendRedirect("addStock.jsp");
         }

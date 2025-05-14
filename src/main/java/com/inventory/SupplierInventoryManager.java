@@ -1,57 +1,74 @@
 package com.inventory;
 
+import utils.CustomStack;
 import java.io.*;
-import java.nio.file.*;
 import java.util.*;
 
-public class SupplierInventoryManager {
+public class SupplierInventoryManager extends AbstractInventoryManager<StockEntry> {
+    private final Map<String, CustomStack<StockEntry>> supplierStacks;
 
-    private String supplierFile;
-    private String stockFile;
-
-    public SupplierInventoryManager(String supplierFile, String stockFile) {
-        this.supplierFile = supplierFile;
-        this.stockFile = stockFile;
+    public SupplierInventoryManager(String supplierFile, String stockFile) throws IOException {
+        super(supplierFile, stockFile);
+        this.supplierStacks = new HashMap<>();
+        loadInventory(); // Initial load
     }
 
-    public void addStock(String supplierUsername, StockEntry entry) throws IOException {
-        List<String> fileLines = new ArrayList<>();
-        boolean supplierFound = false;
+    private void loadInventory() throws IOException {
+        supplierStacks.clear(); // Clear old data before reloading
+        List<String> lines = readLines();
+        String currentSupplier = null;
+        CustomStack<StockEntry> currentStack = null;
 
-        Path supplierPath = Paths.get(supplierFile);
-        if (Files.exists(supplierPath)) {
-            fileLines = Files.readAllLines(supplierPath);
-            for (int i = 0; i < fileLines.size(); i++) {
-                if (fileLines.get(i).trim().equals(supplierUsername)) {
-                    supplierFound = true;
-                    int insertIndex = i + 1;
-                    while (insertIndex < fileLines.size() &&
-                            !fileLines.get(insertIndex).trim().isEmpty() &&
-                            !isSupplierLine(fileLines.get(insertIndex))) {
-                        insertIndex++;
-                    }
-                    fileLines.add(insertIndex, entry.toString());
-                    break;
-                }
+        for (String line : lines) {
+            if (line.trim().isEmpty()) continue;
+
+            if (!line.contains(",")) {
+                currentSupplier = line;
+                currentStack = new CustomStack<>();
+                supplierStacks.put(currentSupplier, currentStack);
+            } else if (currentSupplier != null) {
+                StockEntry entry = StockEntry.fromString(line);
+                currentStack.push(entry);
             }
         }
-
-        if (!supplierFound) {
-            if (!fileLines.isEmpty()) fileLines.add(""); // blank line
-            fileLines.add(supplierUsername);
-            fileLines.add(entry.toString());
-        }
-
-        Files.write(supplierPath, fileLines, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-
-        // Write to stockInventory.txt
-        try (BufferedWriter stockWriter = new BufferedWriter(new FileWriter(stockFile, true))) {
-            stockWriter.write(entry.toString());
-            stockWriter.newLine();
-        }
     }
 
-    private boolean isSupplierLine(String line) {
-        return !line.contains(",") && !line.trim().isEmpty();
+    /**
+     * Call this to force reload inventory from file (e.g. after app restart).
+     */
+    public void reloadInventory() throws IOException {
+        loadInventory();
+    }
+
+    @Override
+    public void addStock(String supplierUsername, StockEntry entry) throws IOException {
+        CustomStack<StockEntry> stack = supplierStacks.computeIfAbsent(
+                supplierUsername,
+                k -> new CustomStack<>()
+        );
+
+        stack.push(entry);
+        saveInventoryToFile();
+        appendToStockFile(entry.toString());
+    }
+
+    void saveInventoryToFile() throws IOException {
+        List<String> lines = new ArrayList<>();
+
+        for (Map.Entry<String, CustomStack<StockEntry>> entry : supplierStacks.entrySet()) {
+            lines.add(entry.getKey());
+
+            for (StockEntry item : entry.getValue().getRemainingItems()) {
+                lines.add(item.toString());
+            }
+
+            lines.add("");
+        }
+
+        writeLines(lines);
+    }
+
+    public CustomStack<StockEntry> getSupplierStack(String supplierUsername) {
+        return supplierStacks.get(supplierUsername);
     }
 }

@@ -43,3 +43,75 @@ paul
 Andrew
 Gold Farms,Food,Sauce,14,280.00,2025-05-07,2025-05-17
 
+paul
+7star,flour,fgjhb894,8439,988.00,2025-05-14,2025-05-19
+
+paul
+7star,flour,sf,87,99.00,2025-05-14,2025-12-17
+
+paul
+7star,flour,expire,6378,76.00,2025-05-14,2025-05-16
+
+paul
+7star,flour,hb,76,88.00,2025-05-14,2025-05-31
+
+peter
+Coca Cola,soft drinks,sprite,27,90.00,2025-05-14,2025-05-22
+
+peter
+Coca Cola,soft drinks,sting,87,87.00,2025-05-14,2025-08-27
+
+peter
+Coca Cola,soft drinks,mirinda,20,60.00,2025-05-14,2025-05-22
+
+peter
+Coca Cola,soft drinks,joos,80,220.00,2025-05-14,2025-05-18
+
+peter
+Coca Cola,soft drinks,kool,82,89.00,2025-05-14,2025-05-31
+
+peter
+Coca Cola,soft drinks,fanta,28,70.00,2025-05-14,2025-05-16
+
+peter
+Coca Cola,soft drinks,coke,20,400.00,2025-05-14,2025-05-16
+
+peter
+Coca Cola,soft drinks,fanta,70,800.00,2025-05-14,2025-05-16
+
+peter
+Coca Cola,soft drinks,coke,50,80.00,2025-05-14,2025-05-31
+
+john
+fruitszone,Fruits,grapes,8,0.02,2025-05-14,2025-05-29
+
+john
+fruitszone,Fruits,woodapple,50,500.00,2025-05-14,2025-06-19
+
+john
+fruitszone,Fruits,banana,80,9.00,2025-05-14,2025-05-17
+
+john
+fruitszone,Fruits,grapes,80,250.00,2025-05-14,2025-05-24
+
+john
+fruitszone,Fruits,apple,46,80.00,2025-05-14,2025-05-27
+
+john
+fruitszone,Fruits,avocado,50,30.00,2025-05-14,2025-05-16
+
+john
+fruitszone,Fruits,pinapal,50,7.00,2025-05-14,2025-05-31
+
+jonah
+nuttwell,nuts,wallnuts,50,900.00,2025-05-14,2025-07-17
+
+jonah
+nuttwell,nuts,pista,70,400.00,2025-05-14,2025-05-16
+
+jonah
+nuttwell,nuts,almonds,40,500.00,2025-05-14,2025-05-30
+
+jonah
+nuttwell,nuts,cashew,20,890.00,2025-05-14,2025-06-18
+
